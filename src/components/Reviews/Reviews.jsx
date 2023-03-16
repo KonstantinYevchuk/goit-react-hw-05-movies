@@ -2,7 +2,9 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getMovieReviews } from "components/Api/Api";
 
-export const Reviews = () => {
+import { Container, Info, Title, Text } from "./Reviews.styled";
+
+const Reviews = () => {
     const { id } = useParams();
     const [movie, setMovie] = useState({});
     const [error, setError] = useState('');
@@ -16,16 +18,16 @@ export const Reviews = () => {
         }
         getMovie()
     }, [id, error])
-    console.log(movie.results);
     
     return (
-        <div>
+        <Container>
             {movie.results ? movie.results.map(item => 
-            <ul key={item.id}>
-               <li ><h3>{item.author}</h3></li>  
-                <li><p>{item.content}</p></li>
-                </ul>
+            <Info key={item.id}>
+            <Title>{item.author}</Title> 
+            <Text>{item.content}</Text>
+            </Info>    
             ) : <h3>Sorry, there is no content</h3>}
-        </div>
+        </Container>
     )  
 }
+export default Reviews

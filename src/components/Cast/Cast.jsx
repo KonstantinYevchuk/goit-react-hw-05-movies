@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getMovieCast } from "components/Api/Api";
+import { Container, Title, Item } from "./Cast.styled";
 
-export const Cast = () => {
+const Cast = () => {
     const { id } = useParams();
     const [movie, setMovie] = useState({});
     const [error, setError] = useState('');
@@ -17,22 +18,24 @@ export const Cast = () => {
         getMovie()
     }, [id, error])
     const {cast} = movie
-    
     return (
-        <div>
-            {cast ? cast.map(item => 
-            <ul key={item.id}>
-                <li>
-                    <h3>{item.name}</h3>
-                </li> 
-                <li>
-                    <img src={`https://image.tmdb.org/t/p/w500/${item.profile_path}`} 
-                    alt={item.name} 
+        <Container> 
+            {cast ? cast.map(({id, profile_path, name, character}) => 
+            <ul key={id}>
+                <Item>
+                    <img src={`https://image.tmdb.org/t/p/w500/${profile_path}`} 
+                    alt={name} 
                     width="250" 
                     />
-                </li> 
+                </Item>
+                <Item>
+                <Title>{name}</Title>
+                </Item>
+                <Item>
+                    <p>Character: {character}</p>
+                </Item>
             </ul>) : ''}
-        </div>
+        </Container>
     )  
 }
-
+export default Cast

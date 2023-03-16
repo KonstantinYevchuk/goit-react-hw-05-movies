@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { getPopularFilms } from "components/Api/Api";
 import { MoviesList } from 'components/MoviesList/MoviesList';
-
+import styled from '@emotion/styled';
+const Title = styled.h1`
+    margin-bottom: 20px;
+`;
 
 const Home = () => {
     const [movies, setMovies] = useState([]);
@@ -21,7 +24,7 @@ const Home = () => {
     
     return (
         <div> 
-            <h1>Trending Today</h1>
+            <Title>Trending Today:</Title>
             <MoviesList movies={movies}/>
         </div>
     )

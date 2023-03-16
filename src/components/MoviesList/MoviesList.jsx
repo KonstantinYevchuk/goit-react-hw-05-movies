@@ -1,17 +1,21 @@
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { StyledLink, Item } from "./MoviesList.styled"; 
+import PropTypes from 'prop-types';
 
 export const MoviesList = ({movies}) => {
-   
+    const location = useLocation();
     return (
         <ul>
-       {movies.map(movie => {
+       {movies.map(({id, title}) => {
         return (
-        <Link key={movie.id} to={`${movie.id}`}><li>{movie.title}</li>
-        </Link>
-        
+        <StyledLink key={id} to={`/movies/${id}`} state={{ from: location }}><Item>{title}</Item>
+        </StyledLink>
         )} 
-       
        )}
        </ul>
     )
+}
+
+MoviesList.propTypes = {
+    movies: PropTypes.arrayOf(PropTypes.object).isRequired
 }

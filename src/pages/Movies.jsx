@@ -1,8 +1,13 @@
-
+import { Search } from "components/Search/Search";
+import styled from '@emotion/styled';
+const Title = styled.h1`
+    margin-bottom: 20px;
+`;
 const Movies = () => {
     return (
         <main>
-            <h1>Movies</h1>
+            <Title>Search Movies: </Title>
+            <Search /> 
         </main>
     )
 };
